@@ -267,6 +267,54 @@ export default function DockingPort() {
           </div>
         </div>
       </div>
+
+      {/* ── A Note From Me (Developer's Dispatch) ──────────────── */}
+      <section id="developer-note" className="mt-14 pt-10 border-t border-white/[0.08]">
+        <div className="rounded-2xl bg-[#0c1017] border border-white/[0.09] p-7 sm:p-10 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
+
+          <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+            <span className="text-[11px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 px-3 py-1 rounded-sm uppercase inline-flex items-center gap-1.5">
+              <MessageSquare className="w-3.5 h-3.5" />
+              A note from me
+            </span>
+            <span className="text-[11px] font-mono text-slate-500">
+              OPEN DISPATCH // RAMANUJ
+            </span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-bold font-display text-white mb-5 tracking-tight">
+            Hey, I'm Ramanuj.
+          </h2>
+
+          <div className="space-y-4 text-slate-300 font-sans text-sm sm:text-base leading-relaxed max-w-3xl">
+            <p>
+              If you've made it this far, welcome to my little corner of the internet.
+            </p>
+            <p>
+              I like building things, breaking them, figuring out why they broke, and then rebuilding them better. I enjoy going down random technical rabbit holes, starting projects that sometimes become something useful, and learning things simply because I want to know how they work.
+            </p>
+            <p>
+              I'm still figuring out exactly where I want to go in computer science. For now, I'm exploring, building, researching, and trying to get a little better at this every day.
+            </p>
+            <p>
+              So feel free to look around.
+            </p>
+            <p>
+              Read something. Open a project. Check out the things I've built. Maybe you'll find something interesting.
+            </p>
+            <p>
+              And if you do, I'd genuinely like to hear from you.
+            </p>
+          </div>
+
+          <div className="mt-6 pt-5 border-t border-white/[0.08] flex items-center justify-between">
+            <span className="font-['Newsreader',serif] italic text-2xl text-cyan-400 font-semibold">
+              — Ramanuj
+            </span>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

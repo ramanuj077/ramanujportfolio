@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { soundFx } from "../utils/sound";
 import { crewProfile } from "../data/profile";
-import { ArrowRight, FlaskConical, Mail, ArrowDown, Terminal } from "lucide-react";
+import { ArrowRight, Mail, Terminal, ArrowDown } from "lucide-react";
 
 /* ── starfield canvas ─────────────────────────────────────── */
 function StarField() {

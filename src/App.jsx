@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import StationNav from "./components/StationNav";
 import StationFooter from "./components/StationFooter";
 import TerminalModal from "./components/TerminalModal";
+import DeveloperNotePopup from "./components/DeveloperNotePopup";
 import CommandCenter from "./pages/CommandCenter";
 import CrewModule from "./pages/CrewModule";
 import MissionControl from "./pages/MissionControl";
@@ -101,6 +102,7 @@ function AppInner() {
       <StationFooter />
 
       <TerminalModal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
+      <DeveloperNotePopup />
     </div>
   );
 }
