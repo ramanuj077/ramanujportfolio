@@ -1,0 +1,349 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   ORBITAL — DESIGN SYSTEM v3.0  "NIGHTMARE TIER"
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --bg:       #030508;
+  --bg2:      #070b12;
+  --panel:    rgba(7,11,18,0.85);
+  --cyan:     #00d4ff;
+  --cyan2:    #0099cc;
+  --green:    #00ff88;
+  --purple:   #8b5cf6;
+  --amber:    #f59e0b;
+  --rose:     #f43f5e;
+  --border:   rgba(0,212,255,0.10);
+  --border-h: rgba(0,212,255,0.45);
+  --text:     #e2eaf5;
+  --muted:    rgba(148,163,184,0.65);
+  --dim:      rgba(100,116,139,0.4);
+}
+
+/* ── Global Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Space bg HD + crisp contrast overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(3,5,10,0.60) 0%, rgba(3,5,10,0.40) 35%, rgba(3,5,10,0.75) 75%, rgba(3,5,10,0.95) 100%),
+    url('/cosmic-nebula.jpg') center 20% / cover no-repeat;
+  pointer-events: none;
+  z-index: 0;
+  image-rendering: auto;
+}
+
+/* Subtle cosmic grid line layer - ultra crisp */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: 
+    radial-gradient(circle at 50% 25%, rgba(0, 212, 255, 0.08) 0%, transparent 60%),
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-position: 0 0, 0 0, 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  { background: #1a2d42; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #254060; box-shadow: 0 0 8px rgba(0,212,255,0.4); }
+
+/* ── Typography ────────────────────────────────────────────── */
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+.font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+/* ── Glassmorphism ─────────────────────────────────────────── */
+.glass {
+  background: rgba(7,11,18,0.7);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--border);
+}
+
+.glass-card {
+  background: rgba(8,13,22,0.72);
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  border: 1px solid rgba(0,212,255,0.09);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.03) 0%, transparent 50%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Animated gradient border on hover */
+.glass-card::after {
+  content: '';
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,212,255,0), rgba(0,212,255,0.5), rgba(139,92,246,0.4), rgba(0,212,255,0));
+  background-size: 300% 300%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+  animation: border-glow 3s ease infinite;
+}
+
+.glass-card:hover {
+  border-color: rgba(0,212,255,0.35);
+  box-shadow: 0 30px 80px -10px rgba(0,0,0,0.7), 0 0 50px -15px rgba(0,212,255,0.25);
+  transform: translateY(-5px);
+}
+
+.glass-card:hover::after { opacity: 1; }
+
+/* 3D Tilt card */
+.tilt-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  transition: transform 0.1s ease;
+}
+
+/* ── Animated Gradient Border ──────────────────────────────── */
+@keyframes border-glow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ── Tech Ticker ───────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 25s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Shimmer gradient text ─────────────────────────────────── */
+@keyframes shimmer {
+  from { background-position: -400% 0; }
+  to   { background-position: 400% 0; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg,
+    rgba(0,212,255,0.4) 0%,
+    #00d4ff 25%,
+    #fff 50%,
+    #00d4ff 75%,
+    rgba(0,212,255,0.4) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ── Glow utils ────────────────────────────────────────────── */
+.glow-cyan   { text-shadow: 0 0 30px rgba(0,212,255,0.7), 0 0 60px rgba(0,212,255,0.3); }
+.glow-green  { text-shadow: 0 0 25px rgba(0,255,136,0.7); }
+.glow-purple { text-shadow: 0 0 25px rgba(139,92,246,0.7); }
+
+/* ── Blink cursor ──────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Float ─────────────────────────────────────────────────── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+.float-y { animation: float-y 6s ease-in-out infinite; }
+
+/* ── Spin ──────────────────────────────────────────────────── */
+@keyframes spin-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+.spin-slow-ccw { animation: spin-ccw 40s linear infinite; }
+
+/* ── Pulse ping ────────────────────────────────────────────── */
+@keyframes ping-slow {
+  0%    { transform: scale(1); opacity: 0.6; }
+  100%  { transform: scale(2.5); opacity: 0; }
+}
+.ping-slow { animation: ping-slow 2.5s cubic-bezier(0,0,0.2,1) infinite; }
+
+/* ── Number counter ────────────────────────────────────────── */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Grid overlay ──────────────────────────────────────────── */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Scanlines ─────────────────────────────────────────────── */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 3px
+  );
+  pointer-events: none;
+}
+
+/* ── Nav glass ─────────────────────────────────────────────── */
+.nav-glass {
+  background: rgba(3,5,8,0.60);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-bottom: 1px solid rgba(0,212,255,0.07);
+}
+
+/* ── Hr glow ───────────────────────────────────────────────── */
+.hr-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.35), transparent);
+  border: none; margin: 0;
+}
+
+/* ── Telemetry label ───────────────────────────────────────── */
+.telemetry {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0,212,255,0.55);
+}
+
+/* ── Corner marks ──────────────────────────────────────────── */
+.corner-mark { position: relative; }
+.corner-mark::before, .corner-mark::after {
+  content: '';
+  position: absolute;
+  width: 10px; height: 10px;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.corner-mark::before { top: -1px; left: -1px; border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan); }
+.corner-mark::after  { bottom: -1px; right: -1px; border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
+.corner-mark:hover::before, .corner-mark:hover::after { width: 14px; height: 14px; opacity: 1; box-shadow: 0 0 8px var(--cyan); }
+
+/* ── Button system ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px;
+  background: linear-gradient(135deg, #00d4ff 0%, #0080cc 100%);
+  color: #030508;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.02em;
+  border-radius: 8px; border: none; cursor: pointer;
+  box-shadow: 0 0 30px rgba(0,212,255,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+  position: relative; overflow: hidden;
+  text-decoration: none;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  pointer-events: none;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 50px rgba(0,212,255,0.65), 0 0 15px rgba(0,212,255,0.9);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px;
+  background: rgba(7,11,18,0.8);
+  color: #c8e8f8; font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600; font-size: 13px;
+  border-radius: 8px; border: 1px solid rgba(0,212,255,0.22);
+  cursor: pointer; backdrop-filter: blur(12px);
+  transition: all 0.25s ease; text-decoration: none;
+}
+.btn-ghost:hover {
+  border-color: rgba(0,212,255,0.6);
+  background: rgba(0,50,80,0.5);
+  box-shadow: 0 0 30px rgba(0,212,255,0.2);
+  color: #fff; transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px;
+  background: transparent; color: rgba(200,220,240,0.65);
+  font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px;
+  border-radius: 8px; border: 1px solid rgba(255,255,255,0.10);
+  cursor: pointer; transition: all 0.25s ease; text-decoration: none;
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.04);
+  color: #fff; transform: translateY(-2px);
+}
+
+/* ── Status badges ─────────────────────────────────────────── */
+.badge-active {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(0,255,136,0.10); border: 1px solid rgba(0,255,136,0.30);
+  color: #00ff88; font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  padding: 3px 10px; border-radius: 3px; text-transform: uppercase;
+}
+.badge-experimental {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.30);
+  color: #f59e0b; font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  padding: 3px 10px; border-radius: 3px; text-transform: uppercase;
+}
+.badge-deployed {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(0,212,255,0.10); border: 1px solid rgba(0,212,255,0.30);
+  color: #00d4ff; font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  padding: 3px 10px; border-radius: 3px; text-transform: uppercase;
+}
+
+/* ── Reduced motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
